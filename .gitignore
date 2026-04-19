@@ -1,0 +1,12 @@
+*__pycache__
+*.idea
+*.DS_Store
+*.gif
+*.jpg
+*.jpeg
+*.png
+*.pt
+*.onnx
+*.csv
+*.txt*
+*.json
