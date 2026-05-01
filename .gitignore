@@ -8,7 +8,6 @@
 *.pt
 *.onnx
 *.csv
-*.txt*
 *.json
 *.env
 scentience-x/*
