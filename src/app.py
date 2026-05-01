@@ -1,14 +1,20 @@
+import os
 import queue
 from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from dotenv import load_dotenv
 
 from scentience import ScentienceDevice
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 MAX_POINTS = 200
 REFRESH_INTERVAL = 5  # seconds — matches BLE broadcast cadence
+LOAD_STREAMLIT: bool = True
 
 # Compounds broadcast on both sensor channels (A & B)
 DUAL_CHANNEL = ["NH3", "NO", "NO2", "CO", "C2H5OH", "H2", "CH4", "C3H8", "C4H10"]
@@ -87,15 +93,30 @@ st.title("Scentience Live Dashboard")
 with st.sidebar:
     st.header("Device Connection")
 
-    api_key_input = st.text_input(
-        "API Key", 
-        key="api_key_input"
+    if LOAD_STREAMLIT:
+        api_key_input = st.text_input(
+            "API Key",
+            value=st.secrets["SCENTIENCE_API_KEY"],
+            type="password",
+            key="api_key_input",
         )
-    uuid_input = st.text_input(
-        "GATT Characteristic UUID",
-        # placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        key="uuid_input",
-    )
+        uuid_input = st.text_input(
+            "GATT Characteristic UUID",
+            value=st.secrets["SCENTIENCE_GATT_UUID"],
+            key="uuid_input",
+        )
+    else:
+        api_key_input = st.text_input(
+            "API Key",
+            value=os.getenv("SCENTIENCE_API_KEY", ""),
+            type="password",
+            key="api_key_input",
+        )
+        uuid_input = st.text_input(
+            "GATT Characteristic UUID",
+            value=os.getenv("SCENTIENCE_GATT_UUID", ""),
+            key="uuid_input",
+        )
 
     btn_col1, btn_col2 = st.columns(2)
     connect_clicked = btn_col1.button(
