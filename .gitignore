@@ -10,3 +10,5 @@
 *.csv
 *.txt*
 *.json
+*.env
+scentience/*

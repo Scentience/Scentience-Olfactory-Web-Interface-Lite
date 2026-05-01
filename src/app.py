@@ -87,10 +87,13 @@ st.title("Scentience Live Dashboard")
 with st.sidebar:
     st.header("Device Connection")
 
-    api_key_input = st.text_input("API Key", type="password", key="api_key_input")
+    api_key_input = st.text_input(
+        "API Key", 
+        key="api_key_input"
+        )
     uuid_input = st.text_input(
         "GATT Characteristic UUID",
-        placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        # placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         key="uuid_input",
     )
 
