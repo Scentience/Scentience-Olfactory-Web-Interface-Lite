@@ -1,5 +1,5 @@
-bleak==0.11.0
+bleak
 streamlit==1.57.0
-pandas==1.3.5
-Pillow==12.2.0
+pandas
+Pillow
 scentience==0.3.0
